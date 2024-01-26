@@ -40,6 +40,16 @@ The `get_weather_by_city` method returns the current temperature in Celsius for 
 
 Contributions are welcome! If you find any issues or have suggestions for improvements, please open an issue or create a pull request.
 
+## Running unit tests
+The project are using RSpec, you can run this command to execute the unit tests:
+```console
+$ rspec spec/weather_sdk_spec.rb
+...
+
+Finished in 0.14229 seconds (files took 3.84 seconds to load)
+3 examples, 0 failures
+```
+
 ## License
 
 The Weather SDK Gem is released under the [MIT License](https://github.com/fabiosoaresv/weather_sdk/blob/main/LICENSE.txt).
