@@ -26,7 +26,7 @@ module WeatherSdk
 
     private
 
-    def convert_kelvin_to_celsius(temp_kelvin)
+    def self.convert_kelvin_to_celsius(temp_kelvin)
       (temp_kelvin - 273.15).round(2)
     end
   end

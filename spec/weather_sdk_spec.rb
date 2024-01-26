@@ -17,10 +17,10 @@ RSpec.describe WeatherSdk::Client do
 
       it 'returns the temperature' do
         stub_request(:get, /#{WeatherSdk::Client::API_URL}/)
-          .to_return(status: 200, body: '{"main": {"temp": 25.5}}')
+          .to_return(status: 200, body: '{"main": {"temp": 296.97}}')
 
         temperature = WeatherSdk::Client.get_weather_by_city(city_name, api_key)
-        expect(temperature).to eq(25.5)
+        expect(temperature).to eq(23.82)
       end
     end
 
