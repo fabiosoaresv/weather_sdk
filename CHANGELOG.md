@@ -1,5 +1,6 @@
-## [Unreleased]
+## Changelog
 
-## [0.1.0] - 2024-01-26
+## [1.0.0] - 2024-01-26
 
-- Initial release
+  * Retrieve current weather information by city name.
+  * Returns temperature data in Celsius.
