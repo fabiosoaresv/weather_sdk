@@ -17,10 +17,17 @@ module WeatherSdk
 
       if response.code == 200
         response_parsed = JSON.parse(response.body)
-        response_parsed.dig('main', 'temp')
+        temperature = response_parsed.dig('main', 'temp')
+        convert_kelvin_to_celsius(temperature)
       else
         raise Error, 'Cannot find city or execute request'
       end
+    end
+
+    private
+
+    def convert_kelvin_to_celsius(temp_kelvin)
+      (temp_kelvin - 273.15).round(2)
     end
   end
 end
