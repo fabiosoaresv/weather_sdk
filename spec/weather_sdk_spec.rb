@@ -1,5 +1,7 @@
 # frozen_string_literal: true
-#require_relative 'path/to/weather_sdk'
+
+require "weather_sdk"
+require 'webmock/rspec'
 
 RSpec.describe WeatherSdk::Client do
   describe 'validate version and' do
