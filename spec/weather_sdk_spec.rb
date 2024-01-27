@@ -16,11 +16,17 @@ RSpec.describe WeatherSdk::Client do
       let(:api_key) { 'valid_api_key' }
 
       it 'returns the temperature' do
-        stub_request(:get, /#{WeatherSdk::Client::API_URL}/)
-          .to_return(status: 200, body: '{"main": {"temp": 296.97}}')
+        fixture_path = File.join(File.dirname(__FILE__), 'fixtures', 'weather_response.json')
+        fixture = File.read(fixture_path)
 
-        temperature = WeatherSdk::Client.get_weather_by_city(city_name, api_key)
-        expect(temperature).to eq(23.82)
+        stub_request(:get, /#{WeatherSdk::Client::API_URL}/).to_return(status: 200, body: fixture)
+
+        response = WeatherSdk::Client.get_weather_by_city(city_name, api_key)
+        first_data = response.first
+
+        expect(first_data.dig(:date)).to eq("27/01")
+        expect(first_data.dig(:temperature)).to eq(17.35)
+        expect(first_data.dig(:weather)).to eq('nuvens dispersas')
       end
     end
 
