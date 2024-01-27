@@ -1,5 +1,10 @@
 ## Changelog
 
+## [2.0.1] - 2024-01-27
+
+  * Applied SOLID principles to improve code structure and maintainability.
+
+
 ## [2.0.0] - 2024-01-26
 
   * Modified the `get_weather_by_city` method in the Weather SDK to include temperature data for today and the next 5 days.

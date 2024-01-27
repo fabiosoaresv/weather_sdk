@@ -11,6 +11,8 @@ RSpec.describe WeatherSdk::Client do
   end
 
   describe '.get_weather_by_city' do
+    let(:service) { WeatherSdk::GetByCityService }
+
     context 'with a valid city and API key' do
       let(:city_name) { 'Piraju' }
       let(:api_key) { 'valid_api_key' }
@@ -19,9 +21,9 @@ RSpec.describe WeatherSdk::Client do
         fixture_path = File.join(File.dirname(__FILE__), 'fixtures', 'weather_response.json')
         fixture = File.read(fixture_path)
 
-        stub_request(:get, /#{WeatherSdk::Client::API_URL}/).to_return(status: 200, body: fixture)
+        stub_request(:get, /#{WeatherSdk::Config::API_URL}/).to_return(status: 200, body: fixture)
 
-        response = WeatherSdk::Client.get_weather_by_city(city_name, api_key)
+        response = WeatherSdk::Client.new(service).get_weather_by_city(city_name, api_key)
         first_data = response.first
 
         expect(first_data.dig(:date)).to eq("27/01")
@@ -35,10 +37,10 @@ RSpec.describe WeatherSdk::Client do
       let(:api_key) { 'invalid_api_key' }
 
       it 'raises an error with a specific message' do
-        stub_request(:get, /#{WeatherSdk::Client::API_URL}/)
+        stub_request(:get, /#{WeatherSdk::Config::API_URL}/)
           .to_return(status: 404, body: '')
 
-        expect { WeatherSdk::Client.get_weather_by_city(city_name, api_key) }
+        expect { WeatherSdk::Client.new(service).get_weather_by_city(city_name, api_key) }
           .to raise_error(WeatherSdk::Error, 'Cannot find city or execute request')
       end
     end
