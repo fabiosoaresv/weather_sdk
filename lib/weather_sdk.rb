@@ -8,8 +8,8 @@ module WeatherSdk
       @weather_service = weather_service
     end
 
-    def get_weather_by_city(city, api_key)
-      @weather_service.execute(city, api_key)
+    def get_weather_by_city_id(id, api_key)
+      @weather_service.execute(id, api_key)
     end
   end
 end

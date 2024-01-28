@@ -1,5 +1,10 @@
 ## Changelog
 
+## [2.0.2] - 2024-01-28
+
+  * Changed service GetByCityService to get temperature by id.
+
+
 ## [2.0.1] - 2024-01-27
 
   * Applied SOLID principles to improve code structure and maintainability.
