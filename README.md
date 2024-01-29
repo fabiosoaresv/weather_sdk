@@ -21,11 +21,13 @@ require 'weather_sdk'
 
 # Replace 'your_api_key' with your actual OpenWeatherMap API key
 api_key = 'your_api_key'
-city_name = 'New York'
+city_id = '123'
+service = WeatherSdk::GetByCityService
+sdk = WeatherSdk::Client.new(service)
 
 begin
-  temperature = WeatherSdk::Client.get_weather_by_city(city_name, api_key)
-  puts "The current temperature in #{city_name} is #{temperature} degrees Celsius."
+  response = sdk.get_weather_by_city_id(city_id, api_key)
+  puts "The current temperatures in #{response[:cit_name]} is #{response[:temperatures]}."
 rescue WeatherSdk::Error => e
   puts "Error: #{e.message}"
 end
@@ -34,7 +36,7 @@ end
 Make sure to replace `'your_api_key'` with your actual API key.
 
 ## API response
-The `get_weather_by_city` method returns the current temperature in Celsius for the specified city. In case of an error, it raises a `WeatherSdk::Error` with a descriptive message.
+The `get_weather_by_city_id` method returns the current temperatures in Celsius for the specified city. In case of an error, it raises a `WeatherSdk::Error` with a descriptive message.
 
 ## Contributing
 
