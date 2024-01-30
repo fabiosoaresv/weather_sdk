@@ -4,6 +4,12 @@ require "weather_sdk"
 require 'webmock/rspec'
 
 RSpec.describe WeatherSdk::Client do
+  let(:api_url) { 'https://api.openweathermap.org/data/2.5/forecast/' }
+  let(:language) { 'pt_br' }
+  let(:range_days) { 40 }
+  let(:unit) { 'metric' }
+  let(:config) { WeatherSdk::Config.new(api_url, language, unit, range_days) }
+
   describe 'validate version and' do
     it 'return a version number' do
       expect(WeatherSdk::VERSION).not_to be nil
@@ -21,7 +27,7 @@ RSpec.describe WeatherSdk::Client do
         fixture_path = File.join(File.dirname(__FILE__), 'fixtures', 'weather_response.json')
         fixture = File.read(fixture_path)
 
-        stub_request(:get, /#{WeatherSdk::Config::API_URL}/).to_return(status: 200, body: fixture)
+        stub_request(:get, /#{config.api_url}/).to_return(status: 200, body: fixture)
 
         response = WeatherSdk::Client.new(service).get_weather_by_city_id(id, api_key)
         first_temperature = response.dig(:temperatures).first
@@ -38,7 +44,7 @@ RSpec.describe WeatherSdk::Client do
       let(:api_key) { 'invalid_api_key' }
 
       it 'raises an error with a specific message' do
-        stub_request(:get, /#{WeatherSdk::Config::API_URL}/)
+        stub_request(:get, /#{config.api_url}/)
           .to_return(status: 404, body: '')
 
         expect { WeatherSdk::Client.new(service).get_weather_by_city_id(id, api_key) }

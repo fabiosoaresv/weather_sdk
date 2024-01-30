@@ -3,7 +3,7 @@ require 'json'
 module WeatherSdk
   class GetByCityService
     def self.execute(city_id, api_key)
-      url = "#{WeatherSdk::Config::API_URL}?id=#{city_id}&cnt=#{WeatherSdk::Config::RANGE_DAYS}&lang=#{WeatherSdk::Config::LANG}&units=#{WeatherSdk::Config::UNIT}&appid=#{api_key}"
+      url = "#{config.api_url}?id=#{city_id}&cnt=#{config.range_days}&lang=#{config.language}&units=#{config.unit}&appid=#{api_key}"
       response = WeatherSdk::ApiRequest.get(url)
 
       raise WeatherSdk::Error.new unless response.code == 200
@@ -35,6 +35,15 @@ module WeatherSdk
 
     def self.parse_date(date)
       DateTime.strptime(date, '%s').strftime('%d/%m')
+    end
+
+    def self.config
+      api_url = 'https://api.openweathermap.org/data/2.5/forecast/'
+      language = 'pt_br'
+      range_days = 40
+      unit = 'metric'
+
+      @config ||= WeatherSdk::Config.new(api_url, language, unit, range_days)
     end
   end
 end

@@ -2,9 +2,19 @@
 
 module WeatherSdk
   class Config
-    API_URL = 'https://api.openweathermap.org/data/2.5/forecast/'
-    LANG = 'pt_br'
-    RANGE_DAYS = 40
-    UNIT = 'metric'
+    attr_reader :api_url, :language, :unit, :range_days
+
+    def initialize(*args)
+      assign_values(*args)
+    end
+
+    private
+
+    def assign_values(api_url, language, unit, range_days = 0)
+      @api_url = api_url
+      @language = language
+      @unit = unit
+      @range_days = range_days
+    end
   end
 end

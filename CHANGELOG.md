@@ -1,5 +1,10 @@
 ## Changelog
 
+## [2.0.2] - 2024-01-30
+
+  * Changed config to receive the values by variables.
+
+
 ## [2.0.2] - 2024-01-28
 
   * Changed service GetByCityService to get temperature by id.
