@@ -1,6 +1,11 @@
 ## Changelog
 
-## [2.0.2] - 2024-01-30
+## [2.0.4] - 2024-01-30
+
+  * Added gitignore
+
+
+## [2.0.3] - 2024-01-30
 
   * Changed config to receive the values by variables.
 
